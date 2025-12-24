@@ -22,6 +22,9 @@ class IngestionService:
             
         if event.domain == "general":
             event.domain = signals["domain"]
+
+        if event.category == "UNKNOWN":
+            event.category = signals["category"]
             
         existing_tags = set(event.tags) if event.tags else set()
         new_tags = set(signals["tags"])

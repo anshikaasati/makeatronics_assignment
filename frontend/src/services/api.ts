@@ -8,6 +8,7 @@ export interface Event {
     raw_content: string;
     domain: string;
     severity: "INFO" | "WARNING" | "CRITICAL" | "UNKNOWN";
+    category: "ISSUE" | "INCIDENT" | "EVENT" | "LOG" | "TASK" | "NOTE" | "UNKNOWN";
     tags: string[];
     created_at: string;
 }

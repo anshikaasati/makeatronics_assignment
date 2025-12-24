@@ -13,10 +13,23 @@ export function EventItem({ event }: EventItemProps) {
         UNKNOWN: "border-l-gray-300",
     }[event.severity];
 
+    const categoryColors = {
+        ISSUE: "text-red-500 border-red-500/20",
+        INCIDENT: "text-red-700 border-red-700/20",
+        TASK: "text-green-600 border-green-500/20",
+        LOG: "text-gray-500 border-gray-500/20",
+        EVENT: "text-blue-500 border-blue-500/20",
+        NOTE: "text-amber-600 border-amber-500/20",
+        UNKNOWN: "text-muted-foreground border-border",
+    };
+
+    const categoryStyle = categoryColors[event.category] || categoryColors.UNKNOWN;
+
     return (
         <div className={cn("p-4 border-l-4 hover:bg-muted/50 transition-colors", severityColor)}>
             <div className="flex justify-between items-start mb-1">
                 <div className="flex items-center gap-2">
+                    {/* Severity Badge */}
                     <span className={cn("text-xs font-bold px-2 py-0.5 rounded-full border",
                         event.severity === "CRITICAL" ? "text-destructive border-destructive/20" :
                             event.severity === "WARNING" ? "text-yellow-600 border-yellow-500/20" :
@@ -24,7 +37,14 @@ export function EventItem({ event }: EventItemProps) {
                     )}>
                         {event.severity}
                     </span>
-                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+
+                    {/* Category Badge */}
+                    <span className={cn("text-xs font-bold px-2 py-0.5 rounded-full border uppercase", categoryStyle)}>
+                        {event.category}
+                    </span>
+
+                    {/* Domain Badge */}
+                    <span className={cn("text-xs font-medium text-muted-foreground uppercase tracking-wide")}>
                         {event.domain}
                     </span>
                 </div>

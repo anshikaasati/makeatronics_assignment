@@ -10,11 +10,21 @@ class Severity(str, Enum):
     CRITICAL = "CRITICAL"
     UNKNOWN = "UNKNOWN"
 
+class Category(str, Enum):
+    ISSUE = "ISSUE"
+    INCIDENT = "INCIDENT"
+    EVENT = "EVENT"
+    LOG = "LOG"
+    TASK = "TASK"
+    NOTE = "NOTE"
+    UNKNOWN = "UNKNOWN"
+
 class EventBase(SQLModel):
     raw_content: str
     source: Optional[str] = "manual"
     domain: Optional[str] = "general"
     severity: Severity = Severity.UNKNOWN
+    category: Category = Category.UNKNOWN
     tags: List[str] = Field(default=[], sa_type=JSON)
     metadata_fields: dict = Field(default={}, sa_type=JSON)
     is_processed: bool = False
