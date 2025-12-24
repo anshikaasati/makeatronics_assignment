@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .app.infrastructure.database import create_db_and_tables
-from .app.api.v1.api import api_router
+from app.infrastructure.database import create_db_and_tables
+from app.api.v1.api import api_router
 
 app = FastAPI(
     title="Maketronics Operational Intelligence",
