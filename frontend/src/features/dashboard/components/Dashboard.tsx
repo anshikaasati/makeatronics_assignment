@@ -1,6 +1,6 @@
 import { AlertTriangle, Info, Activity } from "lucide-react";
 import { useDashboard } from "../hooks/useDashboard";
-import { StatCard } from "./StatCard";
+import { StatCard } from "../../../components/ui/StatCard";
 import { EventItem } from "./EventItem";
 
 export function Dashboard() {

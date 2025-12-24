@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+backend/venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+*.sqlite
+*.db
+
+# Node/React
+node_modules/
+dist/
+build/
+.DS_Store
+coverage/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
