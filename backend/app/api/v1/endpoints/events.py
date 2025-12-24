@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlmodel import Session, select
 from typing import List, Optional
-from backend.app.infrastructure.database import get_session
-from backend.app.domain.models import Event, Severity
-from backend.app.domain.schemas import EventCreate, EventRead
-from backend.app.domain.interfaces import IIntelligenceEngine
-from backend.app.services.ingestion import IngestionService
-from backend.app.api.deps import get_intelligence_engine
+from app.infrastructure.database import get_session
+from app.domain.models import Event, Severity
+from app.domain.schemas import EventCreate, EventRead
+from app.domain.interfaces import IIntelligenceEngine
+from app.services.ingestion import IngestionService
+from app.api.deps import get_intelligence_engine
 
 router = APIRouter()
 
