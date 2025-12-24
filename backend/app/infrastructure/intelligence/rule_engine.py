@@ -75,27 +75,31 @@ class RuleBasedEngine(IIntelligenceEngine):
         """
         
         # 1. INCIDENT
-        if any(k in text for k in ["incident", "accident", "breach", "fire", "explosion", "collision", "outage", "complaint", "emergency", "leakage"]):
+        if any(k in text for k in ["incident", "accident", "breach", "fire", "explosion", "collision", "outage", "complaint", "emergency", "leakage", "smoke"]):
+            return Category.INCIDENT
+            
+        # 1.1 INCIDENT (Contextual)
+        if "unexpected leak" in text or "failed qa" in text:
             return Category.INCIDENT
 
         # 2. TASK (High Priority - Overrides Issue)
-        if any(k in text for k in ["replace", "install", "change"]):
+        if any(k in text for k in ["replace", "install", "change", "archive"]):
             return Category.TASK
 
         # 3. LOG (Strong overrides for specific phrases)
-        if any(k in text for k in ["error log", "system log", "access log", "audit log"]):
+        if any(k in text for k in ["error log", "system log", "access log", "audit log", "error codes", "drop observed"]):
             return Category.LOG
 
         # 4. ISSUE
-        if any(k in text for k in ["issue", "problem", "broken", "bug", "crash", "error", "fail", "glitch", "erratic", "overheat", "unstable", "down", "critical", "leak", "dropping", "504", "faulty"]):
+        if any(k in text for k in ["issue", "problem", "broken", "bug", "crash", "error", "fail", "glitch", "erratic", "overheat", "unstable", "down", "critical", "leak", "dropping", "504", "faulty", "vibration", "calibration", "drop"]):
             return Category.ISSUE
 
-        # 5. EVENT (Specific status overrides that imply completion)
-        if any(k in text for k in ["completed", "deployed", "shipped", "arrived", "finished", "rebooted", "received"]):
+        # 5. EVENT (Specific status overrides that imply completion/scheduling)
+        if any(k in text for k in ["completed", "deployed", "shipped", "arrived", "finished", "rebooted", "received", "scheduled"]):
              return Category.EVENT
 
         # 6. LOG
-        if any(k in text for k in ["log", "metric", "usage", "cpu", "memory", "voltage", "temp", "readings", "observed", "retrieved", "spiked", "threshold", "data", "attempts", "latency"]):
+        if any(k in text for k in ["log", "metric", "usage", "cpu", "memory", "voltage", "temp", "readings", "observed", "retrieved", "spiked", "threshold", "data", "attempts", "latency", "uptime", "codes", "levels"]):
             return Category.LOG
 
         # 7. NOTE (Removed 'minutes' and 'update' to avoid ambiguity)
